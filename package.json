@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tianbuyung/auth-server.git"
+    "url": "git+ssh://git@github.com:tianbuyung/simple-auth-application.git"
   },
   "keywords": [
     "login",
@@ -21,9 +21,9 @@
   "author": "Septian Maulana",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tianbuyung/auth-server/issues"
+    "url": "https://github.com/tianbuyung/simple-auth-application/issues"
   },
-  "homepage": "https://github.com/tianbuyung/auth-server#readme",
+  "homepage": "https://github.com/tianbuyung/simple-auth-application#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
