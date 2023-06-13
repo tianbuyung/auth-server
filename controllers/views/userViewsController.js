@@ -1,6 +1,7 @@
 const { User } = require("../../models");
 const { comparePassword } = require("../../helpers/encryption");
 const { signToken } = require("../../helpers/signature");
+const createLogs = require("../../logs/saveLogsData");
 
 class UserViewsController {
   static getHomePage(req, res) {
@@ -26,7 +27,15 @@ class UserViewsController {
         throw { name: "Passwords do not match" };
       }
 
-      await User.create({ username, password, age });
+      const newUser = await User.create({ username, password, age });
+
+      const data = {
+        action: 'Register',
+        description:`New user with id ${newUser.id} created`,
+        createdAt: newUser.createdAt,
+      }
+
+      createLogs(data)
 
       res.redirect("/login");
     } catch (error) {
