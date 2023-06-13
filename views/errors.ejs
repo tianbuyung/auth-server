@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+  <div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">THIS IS ERROR!</h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span> <%= error.type ></p>
+        <p class="lead">
+            <%= error.message %>
+          </p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+  </div>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>
