@@ -1,6 +1,7 @@
 const { User } = require("../../models");
 const { comparePassword } = require("../../helpers/encryption");
 const { signToken } = require("../../helpers/signature");
+const createLogs = require("../../logs/saveLogsData");
 
 class UserViewsController {
   static getHomePage(req, res) {
@@ -26,7 +27,15 @@ class UserViewsController {
         throw { name: "Passwords do not match" };
       }
 
-      await User.create({ username, password, age });
+      const newUser = await User.create({ username, password, age });
+
+      const data = {
+        action: 'register',
+        description:`New user with id ${newUser.id} created`,
+        createdAt: newUser.createdAt,
+      }
+
+      createLogs(data)
 
       res.redirect("/login");
     } catch (error) {
@@ -78,6 +87,14 @@ class UserViewsController {
         id: user.id,
       });
 
+      const data = {
+        action: 'login',
+        description:`User with id ${user.id} login into app`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
+
       res.redirect("/users");
     } catch (error) {
       res.redirect(`/login?errors=${JSON.stringify(error.name)}`);
@@ -89,6 +106,14 @@ class UserViewsController {
       const users = await User.findAll({
         attributes: { exclude: ["password"] },
       });
+
+      const data = {
+        action: 'users',
+        description:`User view user data`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
 
       res.render("users", { title: "Users", users });
     } catch (error) {

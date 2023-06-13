@@ -1,6 +1,7 @@
 const { User } = require("../../models");
 const { comparePassword } = require("../../helpers/encryption");
 const { signToken } = require("../../helpers/signature");
+const createLogs = require("../../logs/saveLogsData");
 
 class userApiController {
   static async createNewUser(req, res, next) {
@@ -12,6 +13,14 @@ class userApiController {
       }
 
       const newUser = await User.create({ username, password, age });
+
+      const data = {
+        action: 'api/register',
+        description:`New user with id ${newUser.id} created`,
+        createdAt: newUser.createdAt,
+      }
+
+      createLogs(data)
 
       res.status(201).json({
         statusCode: 201,
@@ -53,6 +62,14 @@ class userApiController {
         id: user.id,
       });
 
+      const data = {
+        action: 'api/login',
+        description:`User with id ${user.id} login into app`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
+
       res.status(200).json({
         statusCode: 200,
         data: {
@@ -70,6 +87,14 @@ class userApiController {
       const users = await User.findAll({
         attributes: { exclude: ["password"] },
       });
+
+      const data = {
+        action: 'api/users',
+        description:`User view user data`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
 
       res.status(200).json({
         statusCode: 200,

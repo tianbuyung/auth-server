@@ -1,0 +1,32 @@
+[
+  {
+    "action": "register",
+    "description": "New user with id 1 created",
+    "createdAt": "2023-06-13T12:27:40.756Z"
+  },
+  {
+    "action": "login",
+    "description": "User with id 1 login into app",
+    "createdAt": "2023-06-13T12:29:11.671Z"
+  },
+  {
+    "action": "users",
+    "description": "User view user data",
+    "createdAt": "2023-06-13T12:30:42.133Z"
+  },
+  {
+    "action": "register",
+    "description": "New user with id 2 created",
+    "createdAt": "2023-06-13T12:34:44.381Z"
+  },
+  {
+    "action": "login",
+    "description": "User with id 2 login into app",
+    "createdAt": "2023-06-13T12:35:16.576Z"
+  },
+  {
+    "action": "users",
+    "description": "User view user data",
+    "createdAt": "2023-06-13T12:35:16.582Z"
+  }
+]
