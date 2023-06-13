@@ -13,7 +13,10 @@ const errorHandler = (err, req, res, next) => {
     errorMessage = err.errors.map((element) => {
       return element.message;
     });
-  } else if (err.name === "Passwords do not match") {
+  } else if (
+    err.name === "Passwords do not match" ||
+    err.name === "Username and password are required"
+  ) {
     errorStatusCode = 400;
     errorName = "BadRequest";
     errorMessage = err.name;
