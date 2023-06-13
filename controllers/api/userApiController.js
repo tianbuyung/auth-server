@@ -1,8 +1,8 @@
-const { User } = require("../models");
-const { comparePassword } = require("../helpers/encryption");
-const { signToken } = require("../helpers/signature");
+const { User } = require("../../models");
+const { comparePassword } = require("../../helpers/encryption");
+const { signToken } = require("../../helpers/signature");
 
-class UserController {
+class userApiController {
   static async createNewUser(req, res, next) {
     try {
       const { username, password, confirmPassword, age } = req.body;
@@ -81,4 +81,4 @@ class UserController {
   }
 }
 
-module.exports = UserController;
+module.exports = userApiController;
