@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashPassword } = require("../helpers/encryption");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -41,10 +42,14 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Password is required",
           },
+          len: {
+            args: [6],
+            msg: "Password must be at least 6 characters",
+          },
           validatePassword: (password) => {
-            if (!/^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{6}$/.test(password)) {
+            if (!/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/.test(password)) {
               throw new Error(
-                "The password must contain at least 6 characters including at least 1 uppercase, 1 lowercase, and 1 number."
+                "The password must contain at least 1 uppercase, 1 lowercase, and 1 number."
               );
             }
           },
@@ -66,5 +71,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+  User.beforeCreate((user, _) => {
+    user.password = hashPassword(user.password);
+  });
   return User;
 };

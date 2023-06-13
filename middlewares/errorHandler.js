@@ -13,6 +13,10 @@ const errorHandler = (err, req, res, next) => {
     errorMessage = err.errors.map((element) => {
       return element.message;
     });
+  } else if (err.name === "Passwords do not match") {
+    errorStatusCode = 400;
+    errorName = "BadRequest";
+    errorMessage = err.name;
   } else if (err.name === "InvalidCredentials") {
     errorStatusCode = 401;
     errorName = "Unauthorized";
