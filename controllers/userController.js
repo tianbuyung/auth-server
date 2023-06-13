@@ -64,6 +64,21 @@ class UserController {
       next(error);
     }
   }
+
+  static async getAllUsers(req, res, next) {
+    try {
+      const users = await User.findAll({
+        attributes: { exclude: ["password"] },
+      });
+
+      res.status(200).json({
+        statusCode: 200,
+        data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;
