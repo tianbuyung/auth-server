@@ -30,7 +30,7 @@ class UserViewsController {
       const newUser = await User.create({ username, password, age });
 
       const data = {
-        action: 'Register',
+        action: 'register',
         description:`New user with id ${newUser.id} created`,
         createdAt: newUser.createdAt,
       }
@@ -87,6 +87,14 @@ class UserViewsController {
         id: user.id,
       });
 
+      const data = {
+        action: 'login',
+        description:`User with id ${user.id} login into app`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
+
       res.redirect("/users");
     } catch (error) {
       res.redirect(`/login?errors=${JSON.stringify(error.name)}`);
@@ -98,6 +106,14 @@ class UserViewsController {
       const users = await User.findAll({
         attributes: { exclude: ["password"] },
       });
+
+      const data = {
+        action: 'users',
+        description:`User view user data`,
+        createdAt: new Date(),
+      }
+
+      createLogs(data)
 
       res.render("users", { title: "Users", users });
     } catch (error) {
