@@ -28,7 +28,19 @@ This application was developed using Postgresql (Database) with Sequelize (ORM),
 
 ## Customize configuration
 
-Create `.env` file in root project directory with contents according to the example (see [.env.example](/.env.example)) ensure you fill `NODE_ENV`, `DATABASE_USERNAME`, `DATABASE_PASSWORD` & `JWT_SECRET_KEY` with your own data
+1. Create `.env` file in root project directory with contents according to the example (see [.env.example](/.env.example)) ensure you fill `NODE_ENV`, `DATABASE_USERNAME`, `DATABASE_PASSWORD` & `JWT_SECRET_KEY` with your own data
+
+2. Create database in your local computer
+
+   ```sh
+   npx sequelize-cli db:create
+   ```
+
+3. Migrate model into your database
+
+   ```sh
+   npx sequelize-cli db:migrate
+   ```
 
 ### Compile for Development
 
